@@ -1,4 +1,4 @@
-# GTA San Andreas 100% Checklist
+# GTA San Andreas 100% Interactive Checklist
 
 An interactive checklist for tracking progress in GTA San Andreas.
 
