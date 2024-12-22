@@ -5,8 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --primary: #121212;
+            --secondary: #FAF9F6;
+        }
+
         html {
             scroll-behavior: smooth;
+            color: var(--primary);
+            background-color: var(--secondary);
         }
 
         body {
@@ -16,7 +23,7 @@
         }
 
         header {
-            background-color: white;
+            background-color: var(--secondary);
             padding-bottom: 0.6rem;
             vertical-align: middle;
             border-bottom: 0.1rem;
@@ -91,6 +98,56 @@
             top: 0;
             width: 100vw;
         }
+
+        input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--primary);
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        button {
+            all: unset;
+            display: inline-block;
+            padding: 3px 3px;
+            width: 100px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+            border-radius: 15px;
+            cursor: pointer;
+            border: 1px solid var(--primary);
+            text-align: center;
+            vertical-align: middle;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
     </style>
     <title>GTA SA 100% Checklist</title>
     <script>
@@ -177,6 +234,16 @@
             document.cookie = "selected=; path=.; Expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure";
         }
 
+        function changeTheme() {
+            const root = document.documentElement;
+
+            const primary = getComputedStyle(root).getPropertyValue("--primary");
+            const secondary = getComputedStyle(root).getPropertyValue("--secondary");
+
+            root.style.setProperty("--primary", secondary);
+            root.style.setProperty("--secondary", primary);
+        }
+
     </script>
 </head>
 <body onload="loadFromCookie()">
@@ -188,7 +255,8 @@
             <button onclick="marcarTudo(1,214,true)">100%</button>
             <button onclick="saveToCookie()">Save</button>
             <button onclick="loadFromCookie()">Load</button>
-            <button onclick="deleteCookie()">Delete Saved</button>    
+            <button onclick="deleteCookie()">Delete Saved</button>
+            <button onclick="changeTheme()">Change Theme</button>
         </div>
     </header>
     <section>
