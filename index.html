@@ -157,6 +157,8 @@
     </style>
     <title>GTA SA 100% Checklist</title>
     <script>
+        let checkboxes = 220
+
         function marcarTudo(id_inicial,id_final,estado) {
             for (let index = id_inicial; index <= id_final; index++) {
                 let caixa = document.getElementById(index.toString());
@@ -167,10 +169,10 @@
 
         function checarPorcentagem() {
             let porcentagem = 0;
-            let points = 100 / 187;
+            let progress_point = 100 / 187;
             let exports = 0;
 
-            for (let index = 1; index <= 214; index++) {
+            for (let index = 1; index <= checkboxes; index++) {
                 let caixa = document.getElementById(index.toString());
 
                 if ((index >= 97) && (index <= 126)) {
@@ -179,13 +181,13 @@
                         exports += 1;
                     }
                 } else if (caixa.checked === true) {
-                    porcentagem += 0.5347593582887701;
+                    porcentagem += progress_point;
                 }
             }
             
             if (exports > 0) {
                     let division = Math.floor(exports / 10);
-                    porcentagem += (0.5347593582887701 * division);
+                    porcentagem += (progress_point * division);
             }
 
             let score = document.getElementById("percent");
@@ -207,7 +209,7 @@
             let expiration_date = new Date();
             let cookie_string;
 
-            for (let index = 1; index <= 214; index++) {
+            for (let index = 1; index <= checkboxes; index++) {
                 let caixa = document.getElementById(index.toString());
                 if (caixa.checked === true) {
                     state += index.toString() + ",";
@@ -267,7 +269,7 @@
     </header>
     <section>
         <h2>
-            Los Santos Missions
+            Main Story - Los Santos Missions
             <button onclick="marcarTudo(1,96,true)">Select All</button>
             <button onclick="marcarTudo(1,96,false)">Select None</button>
         </h2>
@@ -350,7 +352,7 @@
     </section>
     <section>
         <h2>
-            Countryside Missions (Red County, Flint County, Whetstone)
+            Main Story - Countryside Missions (Red County, Flint County, Whetstone)
             <button onclick="marcarTudo(1,96,true)">Select All</button>
             <button onclick="marcarTudo(1,96,false)">Select None</button>
         </h2>
@@ -368,15 +370,42 @@
                 <button onclick="marcarTudo(33,64,true)">All</button>
                 <button onclick="marcarTudo(33,64,false)">None</button>    
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="29" id="29"><label for="29">First Date<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="31" id="31"><label for="31">First Base<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="32" id="32"><label for="32">Gone Courting<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="33" id="33"><label for="33">Made in Heaven<br></label>
-
-            <input type="checkbox" onclick="checarPorcentagem()" name="29" id="29"><label for="29">Tanker Commander<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="31" id="31"><label for="31">Local Liquor Store<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="32" id="32"><label for="32">Against All Odds<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="33" id="33"><label for="33">Small Town Bank<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="29" id="29"><label for="29">First Date</label>
+            <select id="catalina-missions" name="catalina-missions">
+                <option value="" disabled selected>Choose...</option>
+                <option value="1st">Tanker Commander</option>
+                <option value="2nd">Local Liquor Store</option>
+                <option value="3rd">Against All Odds</option>
+                <option value="4th">Small Town Bank</option>
+            </select>
+            <br>
+            <input type="checkbox" onclick="checarPorcentagem()" name="31" id="31"><label for="31">First Base</label>
+            <select id="catalina-missions" name="catalina-missions">
+                <option value="" disabled selected>Choose...</option>
+                <option value="1st">Tanker Commander</option>
+                <option value="2nd">Local Liquor Store</option>
+                <option value="3rd">Against All Odds</option>
+                <option value="4th">Small Town Bank</option>
+                <br>
+            </select>
+            <br>
+            <input type="checkbox" onclick="checarPorcentagem()" name="32" id="32"><label for="32">Gone Courting</label>
+            <select id="catalina-missions" name="catalina-missions">
+                <option value="" disabled selected>Choose...</option>
+                <option value="1st">Tanker Commander</option>
+                <option value="2nd">Local Liquor Store</option>
+                <option value="3rd">Against All Odds</option>
+                <option value="4th">Small Town Bank</option>
+            </select>
+            <br>
+            <input type="checkbox" onclick="checarPorcentagem()" name="33" id="33"><label for="33">Made in Heaven</label>
+            <select id="catalina-missions" name="catalina-missions">
+                <option value="" disabled selected>Choose...</option>
+                <option value="1st">Tanker Commander</option>
+                <option value="2nd">Local Liquor Store</option>
+                <option value="3rd">Against All Odds</option>
+                <option value="4th">Small Town Bank</option>
+            </select>
         </div>
         <div>
             <h3>The Truth</h3>
@@ -400,7 +429,7 @@
     </section>
     <section>
         <h2>
-            San Fierro
+            Main Story - San Fierro Missions
             <button onclick="marcarTudo(1,96,true)">Select All</button>
             <button onclick="marcarTudo(1,96,false)">Select None</button>
         </h2>
@@ -423,26 +452,12 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="48" id="48"><label for="48">Snail Trail<br></label>
         </div>
         <div>
-            <h3>Zero</h3>
-            <p>
-                <button onclick="marcarTudo(1,32,true)">All</button>
-                <button onclick="marcarTudo(1,32,false)">None</button>
-            </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="40" id="40"><label for="40">Air Raid<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="41" id="41"><label for="41">Supply Lines...<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="42" id="42"><label for="42">New Model Army<br></label>
-        </div>
-        <div>
             <h3>Cesar Vialpando</h3>
             <p>
                 <button onclick="marcarTudo(1,32,true)">All</button>
                 <button onclick="marcarTudo(1,32,false)">None</button>
             </p>
             <input type="checkbox" onclick="checarPorcentagem()" name="43" id="43"><label for="43">Photo Opportunity<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="58" id="58"><label for="58">Zeroing In<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="59" id="59"><label for="59">Test Drive<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="60" id="60"><label for="60">Customs Fast Track<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="61" id="61"><label for="61">Puncture Wounds<br></label>
         </div>
         <div>
             <h3>Loco Syndicate</h3>
@@ -481,7 +496,7 @@
     </section>
     <section>
         <h2>
-            Desert Missions (Tierra Robada, Bone County)
+            Main Story - Desert Missions (Tierra Robada, Bone County)
             <button onclick="marcarTudo(1,96,true)">Select All</button>
             <button onclick="marcarTudo(1,96,false)">Select None</button>
         </h2>
@@ -511,7 +526,7 @@
     </section>
     <section>
         <h2>
-            Las Venturas
+            Main Story - Las Venturas Missions
             <button onclick="marcarTudo(1,96,true)">Select All</button>
             <button onclick="marcarTudo(1,96,false)">Select None</button>
         </h2>
@@ -572,7 +587,7 @@
     </section>
     <section>
         <h2>
-            Return to Los Santos
+            Main Story - Return to Los Santos Missions
             <button onclick="marcarTudo(1,96,true)">Select All</button>
             <button onclick="marcarTudo(1,96,false)">Select None</button>
         </h2>
@@ -615,14 +630,74 @@
     </section>
     <section>
         <h2>
+            Purchasable Businesses
+            <button onclick="marcarTudo(181,193,true)">Select All</button>
+            <button onclick="marcarTudo(181,193,false)">Select None</button>
+        </h2>
+        <div>
+            <h3>San Fierro</h3>
+            <p>
+                <button onclick="marcarTudo(178,180,true)">All</button>
+                <button onclick="marcarTudo(178,180,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="179" id="179"><label for="179">Zero's RC Shop<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="180" id="180"><label for="180">Wang Cars<br></label>
+        </div>
+        <div>
+            <h3>Desert</h3>
+            <p>
+                <button onclick="marcarTudo(178,180,true)">All</button>
+                <button onclick="marcarTudo(178,180,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="178" id="178"><label for="178">Abandoned Airfield<br></label>
+        </div>
+    </section>
+    <section>
+        <h2>
+            Businesses Missions
+            <button onclick="marcarTudo(194,202,true)">Select All</button>
+            <button onclick="marcarTudo(194,202,false)">Select None</button>
+        </h2>
+        <div>
+            <h3>Zero's RC Shop</h3>
+            <p>
+                <button onclick="marcarTudo(1,32,true)">All</button>
+                <button onclick="marcarTudo(1,32,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="40" id="40"><label for="40">Air Raid<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="41" id="41"><label for="41">Supply Lines...<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="42" id="42"><label for="42">New Model Army<br></label>
+        </div>
+        <div>
+            <h3>Wang Cars</h3>
+            <p>
+                <button onclick="marcarTudo(1,32,true)">All</button>
+                <button onclick="marcarTudo(1,32,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="58" id="58"><label for="58">Zeroing In<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="59" id="59"><label for="59">Test Drive<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="60" id="60"><label for="60">Customs Fast Track<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="61" id="61"><label for="61">Puncture Wounds<br></label>
+        </div>
+        <div>
+            <h3>Other Businesses</h3>
+            <p>
+                <button onclick="marcarTudo(200,202,true)">All</button>
+                <button onclick="marcarTudo(200,202,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="200" id="200"><label for="200">Complete 8 Trucker Missions<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="201" id="201"><label for="201">Complete Level 5 of Valet Parking<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="202" id="202"><label for="202">Complete 7 Quarry Missions<br></label>
+        </div>
+    </section>
+    <section>
+        <h2>
             Imports/Exports
             <button onclick="marcarTudo(97,126,true)">Select All</button>
             <button onclick="marcarTudo(97,126,false)">Select None</button>    
         </h2>
         <div>
-            <h3>
-                Exports - List 1
-            </h3>
+            <h3>Exports - List 1</h3>
             <p>
                 <button onclick="marcarTudo(97,106,true)">All</button>
                 <button onclick="marcarTudo(97,106,false)">None</button>
@@ -639,9 +714,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="106" id="106"><label for="106">Stretch<br></label>
         </div>
         <div>
-            <h3>
-                Exports - List 2
-            </h3>
+            <h3>Exports - List 2</h3>
             <p>
                 <button onclick="marcarTudo(107,116,true)">All</button>
                 <button onclick="marcarTudo(107,116,false)">None</button>
@@ -658,9 +731,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="116" id="116"><label for="116">Tanker<br></label>
         </div>
         <div>
-            <h3>
-                Exports - List 3
-            </h3>
+            <h3>Exports - List 3</h3>
             <p>
                 <button onclick="marcarTudo(117,126,true)">All</button>
                 <button onclick="marcarTudo(117,126,false)">None</button>
@@ -679,14 +750,12 @@
     </section>
     <section>
         <h2>
-            Street Races (22)
+            Street Races
             <button onclick="marcarTudo(127,148,true)">Select All</button>
             <button onclick="marcarTudo(127,148,false)">Select None</button>
         </h2>
         <div>
-            <h3>
-                First 8 Races
-            </h3>
+            <h3>First 8 Races</h3>
             <p>
                 <button onclick="marcarTudo(127,134,true)">All</button>
                 <button onclick="marcarTudo(127,134,false)">None</button>
@@ -701,9 +770,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="134" id="134"><label for="134">Bandito Country (SF)<br></label>            
         </div>
         <div>
-            <h3>
-                Middle 8 Races
-            </h3>
+            <h3>Middle 8 Races</h3>
             <p>
                 <button onclick="marcarTudo(135,142,true)">All</button>
                 <button onclick="marcarTudo(135,142,false)">None</button>
@@ -718,9 +785,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="142" id="142"><label for="142">LV Ringroad<br></label>            
         </div>
         <div>
-            <h3>
-                Last 6 Races
-            </h3>
+            <h3>Last 6 Races</h3>
             <p>
                 <button onclick="marcarTudo(143,148,true)">All</button>
                 <button onclick="marcarTudo(143,148,false)">None</button>
@@ -735,14 +800,12 @@
     </section>
     <section>
         <h2>
-            Properties (32)
+            Safe Houses
             <button onclick="marcarTudo(149,180,true)">Select All</button>
             <button onclick="marcarTudo(149,180,false)">Select None</button>
         </h2>
         <div>
-            <h3>
-                Los Santos Safe Houses (6)
-            </h3>
+            <h3>Los Santos</h3>
             <p>
                 <button onclick="marcarTudo(149,154,true)">All</button>
                 <button onclick="marcarTudo(149,154,false)">None</button>
@@ -755,9 +818,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="154" id="154"><label for="154">Santa Maria Beach<br></label>
         </div>
         <div>
-            <h3>
-                San Fierro Safe Houses (6)
-            </h3>
+            <h3>San Fierro</h3>
             <p>
                 <button onclick="marcarTudo(155,160,true)">All</button>
                 <button onclick="marcarTudo(155,160,false)">None</button>
@@ -770,9 +831,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="160" id="160"><label for="160">Paradiso<br></label>
         </div>
         <div>
-            <h3>
-                Countryside Safe Houses (5)
-            </h3>
+            <h3>Countryside</h3>
             <p>
                 <button onclick="marcarTudo(161,165,true)">All</button>
                 <button onclick="marcarTudo(161,165,false)">None</button>
@@ -783,13 +842,8 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="164" id="164"><label for="164">Angel Pine<br></label>
             <input type="checkbox" onclick="checarPorcentagem()" name="165" id="165"><label for="165">Whetstone<br></label>
         </div>
-    </section>
-    <br>
-    <section>
         <div>
-            <h3>
-                Las Venturas Safe Houses (9)
-            </h3>
+            <h3>Las Venturas</h3>
             <p>
                 <button onclick="marcarTudo(166,174,true)">All</button>
                 <button onclick="marcarTudo(166,174,false)">None</button>
@@ -805,9 +859,7 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="174" id="174"><label for="174">Redsands West<br></label>
         </div>
         <div>
-            <h3>
-                Desert Safe Houses (3)
-            </h3>
+            <h3>Desert</h3>
             <p>
                 <button onclick="marcarTudo(175,177,true)">All</button>
                 <button onclick="marcarTudo(175,177,false)">None</button>
@@ -816,119 +868,59 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="176" id="176"><label for="176">Tierra Robada<br></label>
             <input type="checkbox" onclick="checarPorcentagem()" name="177" id="177"><label for="177">Fort Carson<br></label>
         </div>
-        <div>
-            <h3>
-                Businesses (3)
-            </h3>
-            <p>
-                <button onclick="marcarTudo(178,180,true)">All</button>
-                <button onclick="marcarTudo(178,180,false)">None</button>
-            </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="178" id="178"><label for="178">Abandoned Airfield (Desert)<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="179" id="179"><label for="179">Zero's RC Shop (SF)<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="180" id="180"><label for="180">Wang Cars (SF)<br></label>
-        </div>
     </section>
     <section>
         <h2>
-            Sub-Missions, Schools and Gym (13)
+            Miscellaneous Missions
             <button onclick="marcarTudo(181,193,true)">Select All</button>
             <button onclick="marcarTudo(181,193,false)">Select None</button>
         </h2>
         <div>
-            <h3>
-                Sub-Missions (6)
-            </h3>
+            <h3>Sub-Missions</h3>
             <p>
                 <button onclick="marcarTudo(181,186,true)">All</button>
                 <button onclick="marcarTudo(181,186,false)">None</button>    
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="181" id="181"><label for="181">50 Taxi Missions<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="182" id="182"><label for="182">Vigilante Level 12<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="183" id="183"><label for="183">Firefighter Level 12<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="184" id="184"><label for="184">Pimping Level 10<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="185" id="185"><label for="185">Paramedic Level 12<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="186" id="186"><label for="186">2 Levels of Freight Missions<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="181" id="181"><label for="181">Taxi (50 Fares)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="182" id="182"><label for="182">Vigilante (Level 12)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="183" id="183"><label for="183">Firefighter (Level 12)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="184" id="184"><label for="184">Pimping (Level 10)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="185" id="185"><label for="185">Paramedic (Level 12)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="186" id="186"><label for="186">Freight (Level 2)<br></label>
         </div>
         <div>
-            <h3>
-                School Objectives (4)
-            </h3>
+            <h3>School Objectives</h3>
             <p>
                 <button onclick="marcarTudo(187,190,true)">All</button>
                 <button onclick="marcarTudo(187,190,false)">None</button>
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="187" id="187"><label for="187">Pass All Tests at Driving School<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="188" id="188"><label for="188">Pass All Tests at Boat School<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="189" id="189"><label for="189">Pass All Tests at Flying School<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="190" id="190"><label for="190">Pass All Tests at Bike School<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="189" id="189"><label for="189">Flying School (Desert)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="187" id="187"><label for="187">Driving School (San Fierro)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="188" id="188"><label for="188">Boat School (Bayside)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="190" id="190"><label for="190">Bike School (Las Venturas)<br></label>
         </div>
         <div>
-            <h3>
-                Gym Moves (3)
-            </h3>
+            <h3>Fighting Styles</h3>
             <p>
                 <button onclick="marcarTudo(191,193,true)">All</button>
                 <button onclick="marcarTudo(191,193,false)">None</button>
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="191" id="191"><label for="191">Win Los Santos Gym Moves<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="192" id="192"><label for="192">Win San Fierro Gym Moves<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="193" id="193"><label for="193">Win Las Venturas Gym Moves<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="191" id="191"><label for="191">Boxing (Los Santos)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="192" id="192"><label for="192">Martial Arts (San Fierro)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="193" id="193"><label for="193">Boxing (Las Venturas)<br></label>
         </div>
-    </section>
-    <section>
-        <h2>
-            Other Missions (9)
-            <button onclick="marcarTudo(194,202,true)">Select All</button>
-            <button onclick="marcarTudo(194,202,false)">Select None</button>
-        </h2>
         <div>
-            <h3>
-                Courier Missions (3)
-            </h3>
+            <h3>Courier Missions</h3>
             <p>
                 <button onclick="marcarTudo(194,196,true)">All</button>
                 <button onclick="marcarTudo(194,196,false)">None</button>
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="194" id="194"><label for="194">Los Santos - Roboi's Food Mart<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="195" id="195"><label for="195">San Fierro - Hippy Shopper<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="196" id="196"><label for="196">Las Venturas - Burger Shot<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="194" id="194"><label for="194">Roboi's Food Mart (Los Santos)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="195" id="195"><label for="195">Hippy Shopper (San Fierro)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="196" id="196"><label for="196">Burger Shot (Las Venturas)<br></label>
         </div>
         <div>
-            <h3>
-                Hidden Side Missions (3)
-            </h3>
-            <p>
-                <button onclick="marcarTudo(197,199,true)">All</button>
-                <button onclick="marcarTudo(197,199,false)">None</button>
-            </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="197" id="197"><label for="197">Win BMX Challenge<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="198" id="198"><label for="198">Win All 3 Chiliad Challenges<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="199" id="199"><label for="199">Win NRG-500 Challenge<br></label>
-        </div>
-        <div>
-            <h3>
-                Asset Missions (3)
-            </h3>
-            <p>
-                <button onclick="marcarTudo(200,202,true)">All</button>
-                <button onclick="marcarTudo(200,202,false)">None</button>
-            </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="200" id="200"><label for="200">Complete 8 Trucker Missions<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="201" id="201"><label for="201">Complete Level 5 of Valet Parking<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="202" id="202"><label for="202">Complete 7 Quarry Missions<br></label>
-        </div>
-    </section>
-    <section>
-        <h2>
-            Challenges (12)
-            <button onclick="marcarTudo(203,214,true)">Select All</button>
-            <button onclick="marcarTudo(203,214,false)">Select None</button>
-        </h2>
-        <div>
-            <h3>
-                Collectables (4)
-            </h3>
+            <h3>Collectibles</h3>
             <p>
                 <button onclick="marcarTudo(203,206,true)">All</button>
                 <button onclick="marcarTudo(203,206,false)">None</button>    
@@ -938,36 +930,60 @@
             <input type="checkbox" onclick="checarPorcentagem()" name="205" id="205"><label for="205">Collect 50 Horseshoes<br></label>
             <input type="checkbox" onclick="checarPorcentagem()" name="206" id="206"><label for="206">Find 50 Oysters<br></label>
         </div>
+    </section>
+    <section>
+        <h2>
+            Challenges
+            <button onclick="marcarTudo(203,214,true)">Select All</button>
+            <button onclick="marcarTudo(203,214,false)">Select None</button>
+        </h2>
         <div>
-            <h3>
-                Stadium Challenges (4)
-            </h3>
+            <h3>Stadium Challenges</h3>
             <p>
                 <button onclick="marcarTudo(207,210,true)">All</button>
                 <button onclick="marcarTudo(207,210,false)">None</button>
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="207" id="207"><label for="207">Win 8-Track<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="208" id="208"><label for="208">Win Blood Bowl<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="209" id="209"><label for="209">Win Dirt Track<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="210" id="210"><label for="210">Win Kick Start<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="207" id="207"><label for="207">8-Track<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="208" id="208"><label for="208">Blood Bowl<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="209" id="209"><label for="209">Dirt Track<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="210" id="210"><label for="210">Kick Start<br></label>
         </div>
         <div>
-            <h3>
-                Gun Challenges (4)
-            </h3>
+            <h3>Gun Challenges</h3>
             <p>
                 <button onclick="marcarTudo(211,214,true)">All</button>
                 <button onclick="marcarTudo(211,214,false)">None</button>
             </p>
-            <input type="checkbox" onclick="checarPorcentagem()" name="211" id="211"><label for="211">Win Pistol Challenge<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="212" id="212"><label for="212">Win Micro SMG Challenge<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="213" id="213"><label for="213">Win Shotgun Challenge<br></label>
-            <input type="checkbox" onclick="checarPorcentagem()" name="214" id="214"><label for="214">Win AK-47 Challenge<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="211" id="211"><label for="211">Pistol Challenge<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="212" id="212"><label for="212">Micro SMG Challenge<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="213" id="213"><label for="213">Shotgun Challenge<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="214" id="214"><label for="214">AK-47 Challenge<br></label>
+        </div>
+        <div>
+            <h3>Chilliad Challenges</h3>
+            <p>
+                <button onclick="marcarTudo(197,199,true)">All</button>
+                <button onclick="marcarTudo(197,199,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="197" id="197"><label for="197">Scotch Bonnet Yellow Route<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="199" id="199"><label for="199">Birdseye Winder<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="199" id="199"><label for="199">Cobra Run<br></label>
+        </div>
+        <div>
+            <h3>Other Challenges</h3>
+            <p>
+                <button onclick="marcarTudo(197,199,true)">All</button>
+                <button onclick="marcarTudo(197,199,false)">None</button>
+            </p>
+            <input type="checkbox" onclick="checarPorcentagem()" name="197" id="197"><label for="197">BMX Challenge (Los Santos)<br></label>
+            <input type="checkbox" onclick="checarPorcentagem()" name="199" id="199"><label for="199">NRG-500 Challenge (San Fierro)<br></label>
         </div>
     </section>
     <footer>
         <p>
-            SOURCE: <a href="https://www.gta-sanandreas.com/guides/100percent/index.php">www.gta-sanandreas.com</a>
+            NOTE: Unique Stunt Jumps, gang territories, robbery, dating girlfriends, buying clothes, game consoles, arcade games, basketball and maximizing stats do not increase the completion percentage.
+            <br>
+            SOURCE: <a href="https://gtaforums.com/topic/922024-the-real-breakdown-of-san-andreas/">The Real % Breakdown of San Andreas by KGBeast over at GTAForums.</a>
             <br>
             HTML by: <a href="https://bsky.app/profile/deomkds.bsky.social">@deomkds</a>
         </p>
