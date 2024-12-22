@@ -108,11 +108,13 @@
             outline: none;
             cursor: pointer;
             vertical-align: middle;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         input[type="checkbox"]:checked {
             background-color: var(--primary);
             border-color: var(--primary);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button {
@@ -130,6 +132,10 @@
             text-align: center;
             vertical-align: middle;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Block text selection inside buttons. */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
         }
 
         button:hover {
