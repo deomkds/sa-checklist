@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Mulish:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
         :root {
             --primary: #0F1210;
             --secondary: #F6F0E0;
@@ -36,7 +35,6 @@
             z-index: 2;
             position: sticky;
             top: 0;
-            width: 100vw;
         }
 
         h1 {
@@ -146,7 +144,7 @@
             all: unset;
             display: inline-block;
             padding: 3px 3px;
-            width: 100px;
+            width: 4.3rem;
             font-weight: normal;
             color: var(--primary);
             background-color: var(--secondary);
@@ -233,10 +231,11 @@
         }
 
         function saveToCookie() {
+            const theme = document.getElementById("theme_btn").textContent;
+            const header = document.getElementById("sticky_btn").textContent;
             
             let state = "";
-            let expiration_date = new Date();
-            let cookie_string;
+            let cookie_value = "";
 
             for (let index = 1; index <= checkboxes; index++) {
                 let caixa = document.getElementById(index.toString());
@@ -244,31 +243,84 @@
                     state += index.toString() + ",";
                 }
             }
+            state += theme + "," + header
 
-            expiration_date.setFullYear(expiration_date.getFullYear() + 1);
-            cookie_string = "selected=" + state.slice(0,-1) + "; Expires=" + expiration_date.toUTCString() + "; SameSite=None; Secure";
-            console.log(cookie_string);
-            document.cookie = cookie_string;
+            var exp_date = new Date();
+            exp_date.setFullYear(exp_date.getFullYear() + 1);
+
+            var cookie = ["options=", state, "; path=/; expires=", exp_date.toUTCString(), "; SameSite=None; Secure"].join("");
+
+            document.cookie = cookie;
+            console.log(cookie);
+
+            const btn = document.getElementById("save_btn");
+            let timeout = 1500;
+
+            btn.textContent = "Saved!";
+            setTimeout(() => {
+                btn.textContent = "Save";
+            }, timeout);
         }
 
         function loadFromCookie() {
+            const theme = document.getElementById("theme_btn").textContent;
+            const stick = document.getElementById("sticky_btn").textContent;
             let state = document.cookie;
-            console.log(state);
-            let selected = state.slice(9).split(",");
+            let options = state.slice(8).split(",");
 
+            console.log(state);
             marcarTudo(1,checkboxes,false);
 
-            if (selected.length > 1) {
-                selected.forEach(element => {
-                    document.getElementById(element).checked = true;
+            if (options.length > 1) {
+                options.forEach(element => {
+                    switch(element) {
+                        case "Dark": /* This means the user prefers the Light theme. */
+                            if (theme === "Light") {
+                                changeTheme();
+                            };
+                            break;
+                        case "Light": /* This means the user prefers the Dark theme. */
+                            if (theme === "Dark") {
+                                changeTheme();
+                            };
+                            break;
+                        case "Sticky": /* This means the user prefers Static mode. */
+                            if (stick === "Static") {
+                                changeHeaders();
+                            };
+                            break;
+                        case "Static": /* This means the user prefers Sticky mode. */
+                            if (stick === "Sticky") {
+                                changeHeaders();
+                            };
+                            break;
+                        default:
+                            document.getElementById(element).checked = true;
+                    }
                 });
             }
+
+            const btn = document.getElementById("load_btn");
+            let timeout = 1500;
+
+            btn.textContent = "Loaded!";
+            setTimeout(() => {
+                btn.textContent = "Load";
+            }, timeout);
 
             checarPorcentagem();
         }
 
         function deleteCookie() {
-            document.cookie = "selected=; path=.; Expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure";
+            document.cookie = "options=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure";
+
+            const btn = document.getElementById("delete_btn");
+            let timeout = 1500;
+
+            btn.textContent = "Deleted!";
+            setTimeout(() => {
+                btn.textContent = "Delete";
+            }, timeout);
         }
 
         function changeTheme() {
@@ -280,12 +332,32 @@
             root.style.setProperty("--primary", secondary);
             root.style.setProperty("--secondary", primary);
 
-            button_text = document.getElementById("theme_button").innerText;
+            const theme_button = document.getElementById("theme_btn");
 
-            if (button_text == "Dark Mode") {
-                document.getElementById("theme_button").innerText = "Light Mode";
+            if (theme_button.textContent === "Dark") {
+                theme_button.textContent = "Light";
             } else {
-                document.getElementById("theme_button").innerText = "Dark Mode";
+                theme_button.textContent = "Dark";
+            };
+        }
+
+        function changeHeaders() {
+            const headers = document.querySelectorAll(".sticky");
+
+            headers.forEach(header => {
+                if (header.style.position === "static") {
+                    header.style.position = "sticky";
+                } else {
+                    header.style.position = "static";
+                };
+            })
+
+            const sticky_button = document.getElementById("sticky_btn");
+
+            if (sticky_button.textContent === "Static") {
+                sticky_button.textContent = "Sticky";
+            } else {
+                sticky_button.textContent = "Static";
             };
         }
 
@@ -298,17 +370,18 @@
         <div class="buttons">
             <button onclick="marcarTudo(1,219,false)">0%</button>
             <button onclick="marcarTudo(1,219,true)">100%</button>
-            <button onclick="saveToCookie()">Save</button>
-            <button onclick="loadFromCookie()">Load</button>
-            <button onclick="deleteCookie()">Delete Saved</button>
-            <button onclick="changeTheme()" id="theme_button">Dark Mode</button>
+            <button onclick="saveToCookie()" id="save_btn">Save</button>
+            <button onclick="loadFromCookie()" id="load_btn">Load</button>
+            <button onclick="deleteCookie()" id="delete_btn">Delete</button>
+            <button onclick="changeTheme()" id="theme_btn">Dark</button>
+            <button onclick="changeHeaders()" id="sticky_btn">Static</button>
         </div>
     </header>
     <section>
         <h2 class="sticky">
             ⭐ Main Story - Los Santos Missions
-            <button onclick="marcarTudo(1,29,true)">Select All</button>
-            <button onclick="marcarTudo(1,29,false)">Select None</button>
+            <button onclick="marcarTudo(1,29,true)">All</button>
+            <button onclick="marcarTudo(1,29,false)">None</button>
         </h2>
         <div>
             <h3>🫵🏾 Carl Johnson</h3>
@@ -392,8 +465,8 @@
     <section>
         <h2 class="sticky">
             ⭐ Main Story - Countryside Missions (Red County, Flint County, Whetstone)
-            <button onclick="marcarTudo(30,39,true)">Select All</button>
-            <button onclick="marcarTudo(30,39,false)">Select None</button>
+            <button onclick="marcarTudo(30,39,true)">All</button>
+            <button onclick="marcarTudo(30,39,false)">None</button>
         </h2>
         <div>
             <h3>👮🏾 C.R.A.S.H.</h3>
@@ -437,8 +510,8 @@
     <section>
         <h2 class="sticky">
             ⭐ Main Story - San Fierro Missions
-            <button onclick="marcarTudo(40,57,true)">Select All</button>
-            <button onclick="marcarTudo(40,57,false)">Select None</button>
+            <button onclick="marcarTudo(40,57,true)">All</button>
+            <button onclick="marcarTudo(40,57,false)">None</button>
         </h2>
         <div>
             <h3>🫵🏾 Carl Johnson</h3>
@@ -504,8 +577,8 @@
     <section>
         <h2 class="sticky">
             ⭐ Main Story - Desert Missions (Tierra Robada, Bone County)
-            <button onclick="marcarTudo(58,65,true)">Select All</button>
-            <button onclick="marcarTudo(58,65,false)">Select None</button>
+            <button onclick="marcarTudo(58,65,true)">All</button>
+            <button onclick="marcarTudo(58,65,false)">None</button>
         </h2>
         <div>
             <h3>🚁 Mike Toreno</h3>
@@ -533,8 +606,8 @@
     <section>
         <h2 class="sticky">
             ⭐ Main Story - Las Venturas Missions
-            <button onclick="marcarTudo(66,84,true)">Select All</button>
-            <button onclick="marcarTudo(66,84,false)">Select None</button>
+            <button onclick="marcarTudo(66,84,true)">All</button>
+            <button onclick="marcarTudo(66,84,false)">None</button>
         </h2>
         <div>
             <h3>🇭🇰 Triads</h3>
@@ -594,8 +667,8 @@
     <section>
         <h2 class="sticky">
             ⭐ Main Story - Return to Los Santos Missions
-            <button onclick="marcarTudo(85,92,true)">Select All</button>
-            <button onclick="marcarTudo(85,92,false)">Select None</button>
+            <button onclick="marcarTudo(85,92,true)">All</button>
+            <button onclick="marcarTudo(85,92,false)">None</button>
         </h2>
         <div>
             <h3>🚁 Mike Toreno</h3>
@@ -637,8 +710,8 @@
     <section>
         <h2 class="sticky">
             🏢 Purchasable Businesses
-            <button onclick="marcarTudo(93,95,true)">Select All</button>
-            <button onclick="marcarTudo(93,95,false)">Select None</button>
+            <button onclick="marcarTudo(93,95,true)">All</button>
+            <button onclick="marcarTudo(93,95,false)">None</button>
         </h2>
         <div>
             <h3>🏙️ San Fierro</h3>
@@ -661,8 +734,8 @@
     <section>
         <h2 class="sticky">
             👔 Businesses Missions
-            <button onclick="marcarTudo(96,105,true)">Select All</button>
-            <button onclick="marcarTudo(96,105,false)">Select None</button>
+            <button onclick="marcarTudo(96,105,true)">All</button>
+            <button onclick="marcarTudo(96,105,false)">None</button>
         </h2>
         <div>
             <h3>🤖 Zero's RC Shop</h3>
@@ -699,8 +772,8 @@
     <section>
         <h2 class="sticky">
             🚢 Imports/Exports
-            <button onclick="marcarTudo(106,135,true)">Select All</button>
-            <button onclick="marcarTudo(106,135,false)">Select None</button>  
+            <button onclick="marcarTudo(106,135,true)">All</button>
+            <button onclick="marcarTudo(106,135,false)">None</button>  
         </h2>
         <div>
             <h3>🚢 Exports - List 1</h3>
@@ -757,8 +830,8 @@
     <section>
         <h2 class="sticky">
             🏁 Race Tournaments
-            <button onclick="marcarTudo(136,157,true)">Select All</button>
-            <button onclick="marcarTudo(136,157,false)">Select None</button>
+            <button onclick="marcarTudo(136,157,true)">All</button>
+            <button onclick="marcarTudo(136,157,false)">None</button>
         </h2>
         <div>
             <h3>🥇 Los Santos Street Races</h3>
@@ -814,8 +887,8 @@
     <section>
         <h2 class="sticky">
             🏠 Safe Houses
-            <button onclick="marcarTudo(158,186,true)">Select All</button>
-            <button onclick="marcarTudo(158,186,false)">Select None</button>
+            <button onclick="marcarTudo(158,186,true)">All</button>
+            <button onclick="marcarTudo(158,186,false)">None</button>
         </h2>
         <div>
             <h3🏠 Los Santos</h3>
@@ -885,8 +958,8 @@
     <section>
         <h2 class="sticky">
             ❇️ Miscellaneous Missions
-            <button onclick="marcarTudo(187,206,true)">Select All</button>
-            <button onclick="marcarTudo(187,206,false)">Select None</button>
+            <button onclick="marcarTudo(187,206,true)">All</button>
+            <button onclick="marcarTudo(187,206,false)">None</button>
         </h2>
         <div>
             <h3>↔️ Sub-Missions</h3>
@@ -947,8 +1020,8 @@
     <section>
         <h2 class="sticky">
             🏆 Challenges
-            <button onclick="marcarTudo(207,219,true)">Select All</button>
-            <button onclick="marcarTudo(207,219,false)">Select None</button>
+            <button onclick="marcarTudo(207,219,true)">All</button>
+            <button onclick="marcarTudo(207,219,false)">None</button>
         </h2>
         <div>
             <h3>🏟️ Stadium Challenges</h3>
