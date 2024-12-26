@@ -10,12 +10,15 @@
         :root {
             --primary: #0F1210;
             --secondary: #F6F0E0;
+            --time: 0.3s;
+            --style: ease;
         }
 
         html {
             scroll-behavior: smooth;
             color: var(--primary);
             background-color: var(--secondary);
+            transition: background-color var(--time) var(--style), color var(--time) var(--style);
         }
 
         body {
@@ -29,6 +32,7 @@
             background-color: var(--secondary);
             vertical-align: middle;
             font-family: 'Mulish', sans-serif;
+            transition: background-color var(--time) var(--style), color var(--time) var(--style);
         }
 
         header.sticky {
@@ -92,7 +96,7 @@
             padding: 0.5% 3% 0.5% 2%;
             border-radius: 15px;
             vertical-align: middle;
-            transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+            transition: background-color var(--time) var(--style), color var(--time) var(--style), border var(--time) var(--style);
             cursor: pointer;
             color: var(--primary);
             background-color: var(--secondary);
@@ -107,11 +111,14 @@
 
         footer {
             padding: 1rem;
-            color: var(--primary);
         }
 
         section {
             padding-bottom: 0rem;
+        }
+
+        h2 {
+            transition: background-color var(--time) var(--style), color var(--time) var(--style);
         }
 
         h2.sticky {
@@ -131,13 +138,12 @@
             outline: none;
             cursor: pointer;
             vertical-align: middle;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color var(--time) var(--style), border var(--time) var(--style);
         }
 
         input[type="checkbox"]:checked {
             background-color: var(--primary);
             border-color: var(--primary);
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button {
@@ -155,7 +161,7 @@
             cursor: pointer;
             text-align: center;
             vertical-align: middle;
-            transition: background-color 0.3s ease, transform 0.2s ease, font-weight 0.3s ease;
+            transition: background-color var(--time) var(--style), border var(--time) var(--style), color var(--time) var(--style);
             /* Block text selection inside buttons. */
             user-select: none;
             -webkit-user-select: none;
